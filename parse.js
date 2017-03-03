@@ -14,9 +14,9 @@ module.exports = function parseFunction(fileName) {
     data.push(rows[i].split(','));
   }
 
-  console.log(data);
+  // console.log(data); //logs out the array of arrays
 
   return data;
 }
 
-parseFunction('./traffic-data/simple_data/moving_jan_2016.csv');
+// parseFunction('./traffic-data/simple_data/moving_jan_2016.csv');
