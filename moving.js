@@ -22,16 +22,17 @@ function movingViolations() {
     }
   });
 
-  // console.log(frequency);
-  let specificViolation = Object.keys(frequency); //this spits out a list object properties in my array
-  console.log(specificViolation);
-  specificViolation.forEach(function mostFrequentViolation(){
-    if () {
-      let ___ =
-    } else () {
+  // console.log("this logs out the frequency", frequency);
 
+  let specificViolation = Object.keys(frequency); //this spits out a list object properties in my array
+  // console.log(specificViolation);
+  let highestViolation = 0;
+  specificViolation.forEach(function mostFrequentViolation(violationCode){
+    if (frequency[violationCode] > highestViolation) {
+      highestViolation = frequency[violationCode];
     }
   });
+  console.log(highestViolation);
 
 
 
