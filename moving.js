@@ -26,10 +26,14 @@ function movingViolations() {
 
   let specificViolation = Object.keys(frequency); //this spits out a list object properties in my array
   // console.log(specificViolation);
-  let highestViolation = 0;
+  let highestViolation = {
+    name: 'default',
+    count: 0
+  };
   specificViolation.forEach(function mostFrequentViolation(violationCode){
-    if (frequency[violationCode] > highestViolation) {
-      highestViolation = frequency[violationCode];
+    if (frequency[violationCode] > highestViolation.count) {
+      highestViolation.count = frequency[violationCode];
+      highestViolation.name = violationCode;
     }
   });
   console.log(highestViolation);
