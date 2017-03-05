@@ -33,7 +33,6 @@ function movingViolations() {
 
 /* -------------------------------------------------------- */
     //for average fine amount
-
     let fineAmount = Number(row[10]);
     if (fineAmount) {
       numberOfTickets++;
@@ -61,7 +60,8 @@ function movingViolations() {
   console.log('What is the average fine amount?', fineTotal/numberOfTickets);
 //for: What was the total income from photo citations (tickettype = "Photo")?
   console.log('What was the total income from photo citations (tickettype = "Photo")?', photoFineTotal);
-
+//What was the total income from all moving violations?
+  console.log('What was the total income from all moving violations?', fineTotal);
 
 /* -------------------------------------------------------- */
   /** What was the most common violation type for a moving violation?*/
