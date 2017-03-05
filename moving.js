@@ -4,20 +4,25 @@ let parseFunction = require('./parse.js');
 function movingViolations() {
 
   let movingData = parseFunction('./traffic-data/simple_data/moving_jan_2016.csv');
-  // console.log('prints out an array of arrays that contain moving data', movingData);
+  // console.log('prints out an array of arrays with the moving data file', movingData);
 
-
+  // ticket type frequency
   let frequency = {};
+  //for average fine amount
   let fineTotal = 0;
   let numberOfTickets = 0;
+  //for total income from photo citations
+  let photoFineTotal = 0;
+  let photoCount = 0;
 
-//forEach start
+
+//movingData.forEach start
   movingData.forEach(function commonViolation(row){
     // console.log('this gives me the content of the index 17 within my array', row[17]);
 
 
 /* -------------------------------------------------------- */
-    // ticket type frequency
+    // ticket type frequency --> for most common violation type
     if(!frequency[row[17]]) {
       frequency[row[17]] = 1;
     } else {
@@ -27,7 +32,7 @@ function movingViolations() {
 
 
 /* -------------------------------------------------------- */
-    //average fine amount
+    //for average fine amount
 
     let fineAmount = Number(row[10]);
     if (fineAmount) {
@@ -36,13 +41,27 @@ function movingViolations() {
     }
 /* -------------------------------------------------------- */
 
-  });
-// forEach end
+/* -------------------------------------------------------- */
+    //for total income from photo citations
+    let index10 = Number(row[10]);
+    if (row[9] === 'Photo') {
+      photoCount++;
+      photoFineTotal = photoFineTotal + index10;
+    }
+/* -------------------------------------------------------- */
 
+  });
+//movingData.forEach end
+
+//for most common violation type
   // console.log("this logs out the ticket type frequency", frequency);
+// for: What is the average fine amount?
   // console.log('this logs out the total amount of fines collected', fineTotal);
   // console.log( 'how many tickets are there?', numberOfTickets );
-  console.log('average fine amount', fineTotal/numberOfTickets);
+  console.log('What is the average fine amount?', fineTotal/numberOfTickets);
+//for: What was the total income from photo citations (tickettype = "Photo")?
+  console.log('What was the total income from photo citations (tickettype = "Photo")?', photoFineTotal);
+
 
 /* -------------------------------------------------------- */
   /** What was the most common violation type for a moving violation?*/
@@ -59,11 +78,14 @@ function movingViolations() {
       highestViolation.name = violationCode;
     }
   });
-  console.log('logs out the name and count of the highest violation',highestViolation);
+  console.log('What was the most common violation type for a moving violation?',highestViolation);
 /* -------------------------------------------------------- */
 
+/* -------------------------------------------------------- */
+  //will make a new object that will contian all of the answers I have created
+/* -------------------------------------------------------- */
 
-  // return some collection of the responses
+  // return object of the responses
 }
 
 movingViolations();
