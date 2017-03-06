@@ -1,13 +1,13 @@
 let parseFunction = require('./parse.js');
 
-// ticket type frequency --> for most common violation type
-frequency = {};
-// for most common state licence plate
-stateFrequency = {};
-
-function parkingViolations() {
+module.exports = function parkingViolations() {
 
   let parkingData = parseFunction('./traffic-data/simple_data/parking_feb_2016.csv');
+
+  // ticket type frequency --> for most common violation type
+  frequency = {};
+  // for most common state licence plate
+  stateFrequency = {};
 
   parkingData.forEach(function commonViolation(row){
 /* -------------------------------------------------------- */
@@ -41,23 +41,36 @@ function parkingViolations() {
       highestViolation.name = violationCode;
     }
   });
-  console.log('What was the most common violation type for a parking ticket?', highestViolation.name);
+  let commonViolationType = highestViolation.name;
+  // console.log('What was the most common violation type for a parking ticket?', commonViolationType);
   //How many different types of parking tickets were issued?
-  console.log('How many different types of parking tickets were issued?', specificViolation.length);
+  let parkingTicketType = specificViolation.length;
+  // console.log('How many different types of parking tickets were issued?', parkingTicketType);
   //What state license plate gets the most tickets?
   let specificStateViolation = Object.keys(stateFrequency);
   let stateViolation = {
     name: 'default',
     count: 0
   };
-  specificStateViolation.forEach(function mostFrequentViolation(stateViolationCode){
+  specificStateViolation.forEach(function mostFrequentStateViolation(stateViolationCode){
     if (stateFrequency[stateViolationCode] > stateViolation.count) {
       stateViolation.count = stateFrequency[stateViolationCode];
       stateViolation.name = stateViolationCode;
     }
   });
-  console.log('What state license plate gets the most tickets?', stateViolation.name);
+  let highestStateViolation = stateViolation.name;
+  // console.log('What state license plate gets the most tickets?', highestStateViolation);
 
+/* -------------------------------------------------------- */
+  //will make a new object that will contian all of the answers I have created
+  let parkingAnswers = {
+    'How many different types of parking tickets were issued?': parkingTicketType,
+    'What was the most common violation type for a parking ticket?': commonViolationType,
+    'What state license plate gets the most tickets?': highestStateViolation
+  }
+/* -------------------------------------------------------- */
+
+  return parkingAnswers;
 }
 
 parkingViolations();

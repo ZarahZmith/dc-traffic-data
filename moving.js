@@ -1,7 +1,7 @@
 let parseFunction = require('./parse.js');
 
 
-function movingViolations() {
+module.exports = function movingViolations() {
 
   let movingData = parseFunction('./traffic-data/simple_data/moving_jan_2016.csv');
   // console.log('prints out an array of arrays with the moving data file', movingData);
@@ -57,11 +57,12 @@ function movingViolations() {
 // for: What is the average fine amount?
   // console.log('this logs out the total amount of fines collected', fineTotal);
   // console.log( 'how many tickets are there?', numberOfTickets );
-  console.log('What is the average fine amount?', fineTotal/numberOfTickets);
+  let averageFine = fineTotal/numberOfTickets;
+  // console.log('What is the average fine amount?', averageFine);
 //for: What was the total income from photo citations (tickettype = "Photo")?
-  console.log('What was the total income from photo citations (tickettype = "Photo")?', photoFineTotal);
+  // console.log('What was the total income from photo citations (tickettype = "Photo")?', photoFineTotal);
 //What was the total income from all moving violations?
-  console.log('What was the total income from all moving violations?', fineTotal);
+  // console.log('What was the total income from all moving violations?', fineTotal);
 
 /* -------------------------------------------------------- */
   /** What was the most common violation type for a moving violation?*/
@@ -78,14 +79,21 @@ function movingViolations() {
       highestViolation.name = violationCode;
     }
   });
-  console.log('What was the most common violation type for a moving violation?',highestViolation);
+  let highestViolationCode = highestViolation.name;
+  // console.log('What was the most common violation type for a moving violation?', highestViolationCode);
 /* -------------------------------------------------------- */
 
 /* -------------------------------------------------------- */
   //will make a new object that will contian all of the answers I have created
+  let movingAnswers = {
+    'What was the most common violation type for a moving violation?': highestViolationCode,
+    'What is the average fine amount?': averageFine,
+    'What was the total income from photo citations (tickettype = "Photo")?': photoFineTotal,
+    'What was the total income from all moving violations?': fineTotal
+  }
 /* -------------------------------------------------------- */
 
-  // return object of the responses
+  return movingAnswers;
 }
 
 movingViolations();
